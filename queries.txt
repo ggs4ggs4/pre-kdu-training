@@ -1,0 +1,19 @@
+drop database if exists employee;
+create database employee;
+use employee
+
+create table department(department_id int primary key, department_name varchar(20));
+create table employee(employee_id int primary key, employee_name varchar(20), salary int, department_id int references department.department_id);
+
+SELECT employee.employee_id, employee.employee_name, department.department_name
+FROM employee, department
+WHERE employee.department_id = department.department_id;
+
+SELECT employee_id, employee_name, salary
+FROM employee
+ORDER BY salary DESC;
+
+SELECT department.department_name, AVG(employee.salary) AS average_salary
+FROM employee, department
+WHERE employee.department_id = department.department_id
+GROUP BY department.department_name;
